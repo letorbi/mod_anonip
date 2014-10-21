@@ -40,8 +40,8 @@ static int change_remote_ip(request_rec *r) {
     if (!cfg->enable)
         return DECLINED;
 
-    r->connection->remote_ip = apr_pstrdup(r->connection->pool, "localhost");
-    r->connection->remote_addr->sa.sin.sin_addr.s_addr = inet_addr("127.0.0.1");
+    r->connection->client_ip = apr_pstrdup(r->connection->pool, "localhost");
+    r->connection->client_addr->sa.sin.sin_addr.s_addr = inet_addr("127.0.0.1");
 
     return DECLINED;
 }
