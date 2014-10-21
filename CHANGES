@@ -1,0 +1,13 @@
+1.0b Removed the debian folder
+
+1.0a Arranged the apache 1.3 and 2.0 stuff into subdirectories so that
+     the .c file could have the same name in each case.  This is tidier
+     since the .c file's name turns up in the apache config.
+
+     This module has been running for a while now on cat.org.au's servers
+     so I figure once the files have been tidied up just a little,  it 
+     can be called a 1.0 release.
+
+0.2  Added Apache 2 compatibility
+
+0.1  first version to be distributed
