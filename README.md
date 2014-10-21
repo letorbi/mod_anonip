@@ -21,7 +21,7 @@ After the compilation has finished, you can install and activate the module:
 
     # make install
     # cd ../conf
-    # cp * /etc/apache2/mods/available/
+    # cp * /etc/apache2/mods-available/
     # a2enmod anonip
 
 After enabling the module you have to restart Apache (`service apache2 restart` on Ubuntu).
