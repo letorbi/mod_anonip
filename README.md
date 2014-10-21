@@ -11,11 +11,11 @@ Installation
 
 First you have to clone the repository and compile the module:
 
-    $ git clone https://github.com/letorbi/mod_anonip
+    $ git clone https://github.com/flowyapps/mod_anonip
     $ cd mod_anonip/module
     $ make anonip
 
-You might have to install some kind of Apache development package (`libapache2-prefork-dev` on Ubuntu) to have all tools required for compilation.
+You might have to install some kind of Apache development package (`libapache2-prefork-dev` or `apache2-threaded-dev` on Ubuntu) to have all tools required for compilation.
 
 After the compilation has finished, you can install and activate the module:
 
