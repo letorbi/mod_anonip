@@ -1,3 +1,10 @@
+# Local additions
+
+*.la
+*.lo
+*.slo
+module/.libs/
+
 # NOTE https://github.com/github/gitignore/
 
 # INFO Windows files
