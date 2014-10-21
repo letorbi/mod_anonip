@@ -45,10 +45,16 @@ static int change_remote_ip(request_rec *r) {
     ((char*)&ip)[2] = 0;
     ((char*)&ip)[3] = 0;
 
+#if AP_SERVER_MAJORVERSION_NUMBER > 2 || \
+(AP_SERVER_MAJORVERSION_NUMBER == 2 && AP_SERVER_MINORVERSION_NUMBER >= 4)
     r->connection->client_ip = apr_pstrdup(r->connection->pool, inet_ntoa(ip));
     r->connection->client_addr->sa.sin.sin_addr = ip;
     r->useragent_ip = apr_pstrdup(r->connection->pool, inet_ntoa(ip));
     r->useragent_addr->sa.sin.sin_addr = ip;
+#else
+    r->connection->remote_ip = apr_pstrdup(r->connection->pool, inet_ntoa(ip));
+    r->connection->remote_addr->sa.sin.sin_addr = ip;
+#endif
 
     return DECLINED;
 }
