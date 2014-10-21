@@ -33,23 +33,22 @@ static const char *anonip_enable(cmd_parms *cmd, void *dummy, int flag) {
 }
 
 static int change_remote_ip(request_rec *r) {
-    const char *fwdvalue;
-    char *val;
     struct in_addr ip;
     anonip_server_cfg *cfg = (anonip_server_cfg *)ap_get_module_config(r->server->module_config,
                                                                    &anonip_module);
     if (!cfg->enable)
         return DECLINED;
 
-    r->connection->client_ip = apr_pstrdup(r->connection->pool, "localhost");
-    r->connection->client_addr->sa.sin.sin_addr.s_addr = inet_addr("127.0.0.1");
-
     inet_aton(r->connection->client_ip, &ip);
     //((char*)&ip)[0] = 0;
     //((char*)&ip)[1] = 0;
     ((char*)&ip)[2] = 0;
     ((char*)&ip)[3] = 0;
+
     r->connection->client_ip = apr_pstrdup(r->connection->pool, inet_ntoa(ip));
+    r->connection->client_addr->sa.sin.sin_addr = ip;
+    r->useragent_ip = apr_pstrdup(r->connection->pool, inet_ntoa(ip));
+    r->useragent_addr->sa.sin.sin_addr = ip;
 
     return DECLINED;
 }
