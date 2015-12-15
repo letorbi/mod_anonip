@@ -40,7 +40,12 @@ static int change_remote_ip(request_rec *r) {
     if (cfg->mask<=0 || cfg->mask>4)
         return DECLINED;
 
+#if AP_SERVER_MAJORVERSION_NUMBER > 2 || \
+(AP_SERVER_MAJORVERSION_NUMBER == 2 && AP_SERVER_MINORVERSION_NUMBER >= 4)
     inet_aton(r->connection->client_ip, &ip);
+#else
+    inet_aton(r->connection->remote_ip, &ip);
+#endif
 	for (i=0; i<cfg->mask; i++)
 		((char*)&ip)[3-i] = 0;
 
