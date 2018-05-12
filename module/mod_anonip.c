@@ -11,6 +11,7 @@ module AP_MODULE_DECLARE_DATA anonip_module;
 
 typedef struct {
     int mask;
+    int proxy;
 } anonip_server_cfg;
 
 static void *anonip_create_server_cfg(apr_pool_t *p, server_rec *s) {
@@ -19,6 +20,7 @@ static void *anonip_create_server_cfg(apr_pool_t *p, server_rec *s) {
         return NULL;
 
     cfg->mask = 0;
+    cfg->proxy = 0;
 
     return (void *)cfg;
 }
@@ -32,6 +34,15 @@ static const char *anonip_mask(cmd_parms *cmd, void *dummy, const char* mask) {
     return NULL;
 }
 
+static const char *anonip_proxy(cmd_parms *cmd, void *dummy, const char* proxy) {
+    server_rec *s = cmd->server;
+    anonip_server_cfg *cfg = (anonip_server_cfg *)ap_get_module_config(s->module_config, 
+                                                                   &anonip_module);
+
+    cfg->proxy = atoi(proxy);
+    return NULL;
+}
+
 static int change_remote_ip(request_rec *r) {
 	int i;
     struct in_addr ip;
@@ -42,7 +53,11 @@ static int change_remote_ip(request_rec *r) {
 
 #if AP_SERVER_MAJORVERSION_NUMBER > 2 || \
 (AP_SERVER_MAJORVERSION_NUMBER == 2 && AP_SERVER_MINORVERSION_NUMBER >= 4)
-    inet_aton(r->connection->client_ip, &ip);
+    if(cfg->proxy == 1){
+	inet_aton(r->useragent_ip, &ip);
+    } else {
+	inet_aton(r->connection->client_ip, &ip);
+    }
 #else
     inet_aton(r->connection->remote_ip, &ip);
 #endif
@@ -70,6 +85,13 @@ static const command_rec anonip_cmds[] = {
                  NULL,
                  RSRC_CONF,
                  "Set the bytemask for mod_anonip (e.g. 0=192.168.1.1, 3=192.0.0.0)"
+                 ),
+    AP_INIT_TAKE1(
+                 "AnonipBehindProxy",
+                 anonip_proxy,
+                 NULL,
+                 RSRC_CONF,
+                 "Are you behind a reverse proxy?"
                  ),
     { NULL }
 };
