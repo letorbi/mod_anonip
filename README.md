@@ -11,7 +11,7 @@ Installation
 
 First you have to clone the repository and compile the module:
 
-    $ git clone https://github.com/flowyapps/mod_anonip
+    $ git clone https://github.com/Sonnenstaatland/mod_anonip
     $ cd mod_anonip/module
     $ make anonip
 
@@ -29,11 +29,12 @@ After enabling the module you have to restart Apache (`service apache2 restart` 
 Configuration
 =============
 
-The module comes with one configuration option, which defines how many bytes should be masked:
+The module comes with two configuration option, one which defines how many bytes should be masked and the other one which defines if you are behind a reverse proxy:
 
     AnonipMask = 2
+    AnonipBehindProxy = 1
     
-The default value is `0`, so `mod_anonip` will do nothing if no configuration exists. The configuration files shipped with the module set `AnonipMask = 2`. Values between 0 and 4 are valid with the following results:
+The default value for `AnonipMask` is `0`, so `mod_anonip` will do nothing if no configuration exists. The configuration files shipped with the module set `AnonipMask = 2`. Values between 0 and 4 are valid with the following results:
 
     AnonipMask    Anonymized address
     0             192.168.1.1
@@ -42,5 +43,7 @@ The default value is `0`, so `mod_anonip` will do nothing if no configuration ex
     3             192.0.0.0
     4             0.0.0.0
     [other]       192.168.1.1
+
+The default value for `AnonipBehindProxy` is `0`, so `mod_anonip` will assume you are not behind a reverse proxy and use the IP provided by the currently used connection. If set to `1` it will use the IP provided from the HTTP-Header `X-Forwarded-For` which can be spoofed. Don't use that setting if you don't trust your reverse proxy!!! The configuration files shipped with the module set `AnonipBehindProxy = 1`.
 
 As long, as you mask at least 2 bytes of the IP address, your website will be in accordance with the privacy recommendations of the [Independent Centre for Privacy Protection in Germany (ULD)](https://www.datenschutzzentrum.de).
