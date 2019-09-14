@@ -1,9 +1,9 @@
 mod_anonip
 ==========
 
-A simple Apache2 module to anonymize the IP address of any request by a specific number of bytes.
+A simple Apache2 module to anonymize the IP address of any request by a specific number of bytes. It is licensed as open source under the GPL version 3.
 
-The original version of *mod_anonip* is based on [*mod_removeip*](http://www.wirspeichernnicht.de/content/view/14/24/),
+The original version of *mod_anonip* is based on [*mod_removeip*](https://github.com/moba/libapache-mod-removeip),
 but *mod_anonip* just anonymizes the IP-address by removing a specified number of bytes instead of removing the IP-address completely. This - unlike *mod_removeip* - allows you to preserve the privacy of your visitors, while still being able to log the origin country of a request or to serve website content based on GeoIP.
 
 Installation
@@ -43,4 +43,8 @@ The default value is `0`, so `mod_anonip` will do nothing if no configuration ex
     4             0.0.0.0
     [other]       192.168.1.1
 
-As long, as you mask at least 2 bytes of the IP address, your website will be in accordance with the privacy recommendations of the [Independent Centre for Privacy Protection in Germany (ULD)](https://www.datenschutzzentrum.de).
+As long, as you mask at least 2 bytes of the IP address, your website will be in accordance with the privacy recommendations of the [Independent Centre for Privacy Protection in Schleswig-Holstein, Germany (ULD)](https://www.datenschutzzentrum.de).
+
+----
+
+Copyright 2014-2019 Torben Haase \<[https://pixelsvsbytes.com](https://pixelsvsbytes.com)>
