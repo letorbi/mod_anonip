@@ -11,7 +11,7 @@ Installation
 
 First you have to clone the repository and compile the module:
 
-    $ git clone https://github.com/flowyapps/mod_anonip
+    $ git clone https://github.com/letorbi/mod_anonip
     $ cd mod_anonip/module
     $ make anonip
 
