@@ -6,7 +6,7 @@ A simple Apache2 module to anonymize the IP address of any request by a specific
 The original version of *mod_anonip* is based on [*mod_removeip*](https://github.com/moba/libapache-mod-removeip),
 but *mod_anonip* just anonymizes the IP-address by removing a specified number of bytes instead of removing the IP-address completely. This - unlike *mod_removeip* - allows you to preserve the privacy of your visitors, while still being able to log the origin country of a request or to serve website content based on GeoIP.
 
-*This project is not unmaintained, but since I have a lot of other things on my list, it is unlikely that I will commit something new to the codebase in the forseeable future. However, I will merge pull requests and fix bugs that have been reported.*
+*This project is still maintained, but since I have a lot of other things on my list, it is unlikely that I will commit something new to the codebase in the forseeable future. However, I will merge pull requests and fix bugs that have been reported.*
 
 Installation
 ============
