@@ -46,9 +46,9 @@ The default value for `AnonipMask` is `0`, so `mod_anonip` will do nothing if no
     4             0.0.0.0
     [other]       192.168.1.1
 
-The default value for `AnonipBehindProxy` is `0`, so `mod_anonip` will assume you are not behind a reverse proxy and use the IP provided by the currently used connection. If set to `1` it will use the IP provided from the HTTP-Header `X-Forwarded-For` which can be spoofed. Don't use that setting if you don't trust your reverse proxy!!! The configuration files shipped with the module set `AnonipBehindProxy = 1`.
-
 As long, as you mask at least 2 bytes of the IP address, your website will be in accordance with the privacy recommendations of the [Independent Centre for Privacy Protection in Schleswig-Holstein, Germany (ULD)](https://www.datenschutzzentrum.de).
+
+The default value for `AnonipBehindProxy` is `0`, so `mod_anonip` will assume you are not behind a reverse proxy and use the IP provided by the currently used connection. If set to `1`, it will use the IP provided from the HTTP-header `X-Forwarded-For`. The header can be spoofed, so don't use that setting, if you do not trust the reverse proxy.
 
 ----
 
